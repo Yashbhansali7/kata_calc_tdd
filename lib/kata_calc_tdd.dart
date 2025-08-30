@@ -3,7 +3,8 @@ class KataCalculator {
     // Returning 0 if the given input is Empty
     if (inputNumber.isEmpty) return 0;
 
-    final List<String> inputList = inputNumber.split(",");
+    final String allowedSeperators = ",|\n";
+    final List<String> inputList = inputNumber.split(RegExp(allowedSeperators));
     int sum = 0;
 
     for (String singleNum in inputList) {
