@@ -2,10 +2,22 @@ class KataCalculator {
   static int add(String inputNumber) {
     // Returning 0 if the given input is Empty
     if (inputNumber.isEmpty) return 0;
+
+    final List<String> inputList = inputNumber.split(",");
+    int sum = 0;
+
+    for (String singleNum in inputList) {
+      int parsedNum = parsedInt(singleNum);
+      sum += parsedNum;
+    }
+    return sum;
+  }
+
+  static int parsedInt(String number) {
     try {
-      return int.parse(inputNumber);
+      return int.parse(number);
     } catch (e) {
-      throw Exception("Given $inputNumber input it not a valid number");
+      throw Exception("Given $number input it not a valid number");
     }
   }
 }
