@@ -2,7 +2,9 @@ import 'package:kata_calc_tdd/kata_calc_tdd.dart';
 import 'package:test/test.dart';
 
 void main() {
-  test('calculate', () {
-    expect(calculate(), 42);
+  group("kata calculator add test cases", () {
+    test('return 0 for empty input number', () {
+      expect(KataCalculator.add(""), 0);
+    });
   });
 }
