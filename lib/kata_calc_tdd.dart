@@ -16,12 +16,23 @@ class KataCalculator {
 
     // Spliting the input with the seperators regex
     final List<String> inputList = numString.split(RegExp(allowedSeperators));
+
     int sum = 0;
+    List<int> negativeNumbers = [];
 
     // Parsing and adding
     for (String singleNum in inputList) {
       int parsedNum = parsedInt(singleNum);
-      sum += parsedNum;
+      if (parsedNum < 0) {
+        negativeNumbers.add(parsedNum);
+      } else {
+        sum += parsedNum;
+      }
+    }
+    if (negativeNumbers.isNotEmpty) {
+      throw Exception(
+        'negative numbers not allowed ${negativeNumbers.join(',')}',
+      );
     }
     return sum;
   }

@@ -16,7 +16,7 @@ void main() {
     test('returns sum for comma seperator input numbers', () {
       expect(KataCalculator.add("4,2"), 6);
       expect(KataCalculator.add("0,2"), 2);
-      expect(KataCalculator.add("-1,-1"), -2);
+      // expect(KataCalculator.add("-1,-1"), -2);
     });
 
     test('returns sum for new line seperator input numbers', () {
@@ -35,7 +35,7 @@ void main() {
     });
 
     // Negative Flows
-    test('throws not a number error for input: ABC', () {
+    test('throws not a number error for invalid input', () {
       String input = 'ABC';
       expect(
         () => KataCalculator.add(input),
@@ -45,6 +45,41 @@ void main() {
                 e.toString().contains(
                   'Given $input input it not a valid number',
                 );
+          }),
+        ),
+      );
+    });
+
+    test('throws negative numbers not allowed', () {
+      expect(
+        () => KataCalculator.add("-2"),
+        throwsA(
+          predicate((e) {
+            return e is Exception &&
+                e.toString().contains('negative numbers not allowed -2');
+          }),
+        ),
+      );
+    });
+
+    test('throws and lists all negative numbers', () {
+      expect(
+        () => KataCalculator.add('1,-2,-4,3'),
+        throwsA(
+          predicate((e) {
+            return e is Exception &&
+                e.toString().contains('negative numbers not allowed -2,-4');
+          }),
+        ),
+      );
+    });
+    test('supports custom delimiter and negative exception', () {
+      expect(
+        () => KataCalculator.add('//;\n1;-2;3;-4'),
+        throwsA(
+          predicate((e) {
+            return e is Exception &&
+                e.toString().contains('negative numbers not allowed -2,-4');
           }),
         ),
       );
