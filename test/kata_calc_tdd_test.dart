@@ -8,36 +8,31 @@ void main() {
       expect(KataCalculator.add(""), 0);
     });
 
-    test('returns 1 for single input number: 1', () {
+    test('returns number for single input number', () {
+      expect(KataCalculator.add("4"), 4);
       expect(KataCalculator.add("1"), 1);
     });
 
-    test('returns 4 for single input number: 4', () {
-      expect(KataCalculator.add("4"), 4);
-    });
-
-    test('returns sum: 6 for comma seperator input numbers: 4,2', () {
+    test('returns sum for comma seperator input numbers', () {
       expect(KataCalculator.add("4,2"), 6);
-    });
-
-    test('returns sum: 2 for comma seperator input numbers: 0,2', () {
       expect(KataCalculator.add("0,2"), 2);
-    });
-
-    test('returns sum: -2 for comma seperator input numbers: -1,-1', () {
       expect(KataCalculator.add("-1,-1"), -2);
     });
 
-    test('returns sum: 3 for new line seperator input numbers: 1\n2', () {
-      expect(KataCalculator.add("4,2"), 6);
+    test('returns sum for new line seperator input numbers', () {
+      expect(KataCalculator.add("1\n2"), 3);
+      expect(KataCalculator.add("3\n3"), 6);
     });
 
-    test(
-      'returns sum: 6 for new line & comma seperator input numbers: 1\n2,3',
-      () {
-        expect(KataCalculator.add("4,2"), 6);
-      },
-    );
+    test('returns sum for new line & comma seperators input numbers', () {
+      expect(KataCalculator.add("1\n2,3"), 6);
+      expect(KataCalculator.add("1,2\n3"), 6);
+    });
+
+    test('returns sum for custom delimiter input numbers', () {
+      expect(KataCalculator.add('//;\n1;2'), 3);
+      expect(KataCalculator.add('//-\n1-2-3'), 6);
+    });
 
     // Negative Flows
     test('throws not a number error for input: ABC', () {

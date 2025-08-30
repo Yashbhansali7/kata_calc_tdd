@@ -1,12 +1,24 @@
 class KataCalculator {
-  static int add(String inputNumber) {
+  static int add(String inputNumbers) {
     // Returning 0 if the given input is Empty
-    if (inputNumber.isEmpty) return 0;
+    if (inputNumbers.isEmpty) return 0;
 
-    final String allowedSeperators = ",|\n";
-    final List<String> inputList = inputNumber.split(RegExp(allowedSeperators));
+    String allowedSeperators = ",|\n";
+    String numString = inputNumbers;
+
+    // For custom delimiters
+    final delimiters = RegExp(r'^//(.+)\n');
+    final match = delimiters.firstMatch(inputNumbers);
+    if (match != null) {
+      allowedSeperators = RegExp.escape(match.group(1)!);
+      numString = inputNumbers.substring(match.end);
+    }
+
+    // Spliting the input with the seperators regex
+    final List<String> inputList = numString.split(RegExp(allowedSeperators));
     int sum = 0;
 
+    // Parsing and adding
     for (String singleNum in inputList) {
       int parsedNum = parsedInt(singleNum);
       sum += parsedNum;
